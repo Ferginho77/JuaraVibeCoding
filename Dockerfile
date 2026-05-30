@@ -1,5 +1,6 @@
 # === STAGE 1: Build Aplikasi ===
-FROM node:18-alpine AS build
+# Ubah dari node:18-alpine menjadi node:20-alpine atau node:22-alpine
+FROM node:20-alpine AS build
 WORKDIR /app
 
 # Salin package.json dan install dependencies
@@ -12,13 +13,8 @@ RUN npm run build
 
 # === STAGE 2: Production Server ===
 FROM nginx:alpine
-
-# Salin hasil build dari Stage 1 ke folder statis Nginx
-# Catatan: Jika menggunakan Create React App, ubah "/app/dist" menjadi "/app/build"
 COPY --from=build /app/dist /usr/share/nginx/html
-
-# Salin konfigurasi Nginx kustom jika diperlukan (opsional, untuk menangani React Router)
+# Jika pakai react-router, buka komen baris di bawah ini:
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
-
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
