@@ -280,20 +280,7 @@ export default function Dashboard() {
 
         {/* Right Column: API Data Cards */}
         <div className="flex flex-col gap-4 md:col-span-1 lg:col-span-1">
-          <Card
-            title="Cuaca"
-            value={
-              weather?.temperature
-                ? `${weather.temperature}°C ${capitalize(weather.description)}`
-                : "Data tidak tersedia"
-            }
-            icon={ApiIcon[weather?.icon] || faSun}
-          />
-          <Card 
-            title="Lokasi" 
-            value={weather?.location || "Lokasi tidak ditemukan"}  
-            icon={faMapPin} 
-          />
+         
           <Card 
             title="Tanggal" 
             value={time} 
